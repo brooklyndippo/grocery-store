@@ -1,11 +1,13 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, SelectField, SubmitField
-from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from wtforms_sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired, Length, URL
 
 class GroceryStoreForm(FlaskForm):
     """Form for adding/updating a GroceryStore."""
-
+    title = StringField(label='Store Name', validators=[DataRequired])
+    address = StringField(label='Address', validators=[DataRequired])
+    
     # TODO: Add the following fields to the form class:
     # - title - StringField
     # - address - StringField
