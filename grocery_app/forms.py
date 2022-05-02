@@ -1,5 +1,7 @@
+from ast import Store
+from tkinter.tix import Select
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, SelectField, SubmitField
+from wtforms import StringField, DateField, SelectField, SubmitField, FloatField
 from wtforms_sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired, Length, URL
 
@@ -7,21 +9,16 @@ class GroceryStoreForm(FlaskForm):
     """Form for adding/updating a GroceryStore."""
     title = StringField(label='Store Name', validators=[DataRequired])
     address = StringField(label='Address', validators=[DataRequired])
-    
-    # TODO: Add the following fields to the form class:
-    # - title - StringField
-    # - address - StringField
-    # - submit button
-    pass
+    submit_button = SubmitField(label='Submit')
+
+def store_query():
+    return Store.query
 
 class GroceryItemForm(FlaskForm):
     """Form for adding/updating a GroceryItem."""
-
-    # TODO: Add the following fields to the form class:
-    # - name - StringField
-    # - price - FloatField
-    # - category - SelectField (specify the 'choices' param)
-    # - photo_url - StringField
-    # - store - QuerySelectField (specify the `query_factory` param)
-    # - submit button
-    pass
+    name = StringField(label='Item Name', validators=[DataRequired])
+    price = FloatField(label='Price', validators=[DataRequired])
+    category = SelectField(label='Category', choices=['Produce', 'Bread', 'Dairy', 'Meat/Seafood', 'Frozen', 'Snack', 'Other'])
+    photo_url = StringField(label='Image', validators=[DataRequired])
+    store = QuerySelectField(label='Store', query_factory=store_query)
+    submit_button = SubmitField(label='Submit')
