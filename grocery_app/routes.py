@@ -38,19 +38,24 @@ def new_store():
         # - redirect the user to the store detail page.
         return redirect(url_for('main.store_detail', store_id=store.id))
 
-    return render_template('new_store.html', form=form)
+    return render_template('new_store.html', form=form, form_title='New Store')
 
 @main.route('/new_item', methods=['GET', 'POST'])
 def new_item():
     # TODO: Create a GroceryItemForm
+    form = GroceryItemForm()
 
     # TODO: If form was submitted and was valid:
+    if form.validate_on_submit():
+        item = GroceryItem(
+
+        )
     # - create a new GroceryItem object and save it to the database,
     # - flash a success message, and
     # - redirect the user to the item detail page.
 
     # TODO: Send the form to the template and use it to render the form fields
-    return render_template('new_item.html')
+    return render_template('new_item.html', form=form, form_title='New Item')
 
 @main.route('/store/<store_id>', methods=['GET', 'POST'])
 def store_detail(store_id):
@@ -68,6 +73,7 @@ def store_detail(store_id):
 
 @main.route('/item/<item_id>', methods=['GET', 'POST'])
 def item_detail(item_id):
+
     item = GroceryItem.query.get(item_id)
     # TODO: Create a GroceryItemForm and pass in `obj=item`
 
@@ -79,4 +85,3 @@ def item_detail(item_id):
     # TODO: Send the form to the template and use it to render the form fields
     item = GroceryItem.query.get(item_id)
     return render_template('item_detail.html', item=item)
-

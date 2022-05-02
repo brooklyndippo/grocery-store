@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{ form_title }}</h1>
+
+<form method="POST">
+    <fieldset>
+        <legend>Please enter your information:</legend>
+
+        {% block form %}{% endblock %}
+
+        <input type="submit" value="Submit">
+    </fieldset>
+</form>
+
+{% endblock %}
