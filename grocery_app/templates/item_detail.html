@@ -1,5 +1,7 @@
-{% extends 'base.html' %}
-{% block content %}
+{% from '/partials/_renderfield.html' import renderfield %}
+{% extends 'partials/form.html' %}
+
+{% block detail %}
 
 <h1>Item - {{ item.name }}</h1>
 
@@ -11,21 +13,18 @@
 
 <p><strong>Store:</strong> {{ item.store.title }}</p>
 
+{% endblock %}
 
-<h2>Edit Item</h2>
+{% block form %}
 
-<form>
-    <fieldset>
-        <legend>Please enter your information:</legend>
-
-
-
-        <!-- TODO: Remove the next paragraph and use the `form` object passed in 
-            from the route to render a form. -->
-        <p><em>Form fields go here!</em></p>
-
-        <input type="submit" value="Submit">
-    </fieldset>
-</form>
+            {{ form.csrf_token }}
+            {{ renderfield(form.name) }}
+            {{ renderfield(form.price) }}
+            {{ renderfield(form.category) }}
+            {{ renderfield(form.photo_url) }}
+            {{ renderfield(form.store) }}
+            {% if error %}
+                <div class= 'text-dangerous'>{{ error }}</div>
+            {% endif %}
 
 {% endblock %}

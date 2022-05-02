@@ -6,6 +6,9 @@
             {{ form.csrf_token }}
             {{ renderfield(form.name) }}
             {{ renderfield(form.price) }}
+            {{ renderfield(form.category) }}
+            {{ renderfield(form.photo_url) }}
+            {{ renderfield(form.store) }}
             {% if error %}
                 <div class= 'text-dangerous'>{{ error }}</div>
             {% endif %}
